@@ -1,0 +1,38 @@
+import React, { createContext, useState } from 'react';
+import AdminPage from './AdminPage';
+import Login from './Login';
+
+// Create the authentication context
+const AuthContext = createContext();
+
+// Define the authentication state and functions
+const AuthProvider = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const login = () => {
+    setIsAuthenticated(true);
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+  };
+
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <div>
+        {/* Render the login page or the admin page based on the authentication state */}
+        {!isAuthenticated ? <Login /> : <AdminPage />}
+      </div>
+    </AuthProvider>
+  );
+};
+
+export default App;
