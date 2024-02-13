@@ -17,7 +17,7 @@ export default function Register() {
   })
   const handleRegister = async () => {
     if (!fields || fields?.password?.length < 8 || !fields?.email) {
-      setSnack({...snack, open: true, message: "لطفا خطاهای فرم را رفع کنید." })
+      setSnack({ ...snack, open: true, message: "لطفا خطاهای فرم را رفع کنید." })
       console.log(snack)
     } else {
       fetch(`${process.env.REACT_APP_BACKEND_API_URL}/user/register`, {
@@ -30,7 +30,7 @@ export default function Register() {
         .then(res => res.json())
         .then(data => {
           console.log(data)
-          data.status && setSnack({open:true,message:"حساب کاربری شما ایجاد شد!", severity:"success"})
+          data.status && setSnack({ open: true, message: "حساب کاربری شما ایجاد شد!", severity: "success" })
         })
     }
 
@@ -39,9 +39,9 @@ export default function Register() {
     loginUser?.token ? <Navigate to="/panel" /> :
       <Stack alignItems="center" justifyContent="center" height="100vh" sx={{ backgroundColor: "#eeb1c0", direction: "ltr", backgroundImage: `url(${process.env.PUBLIC_URL}'/assets/login-bg.webp')`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center bottom" }}>
         <Link to="/"><Box component="img" src={`${process.env.PUBLIC_URL}/assets/logo.png`} alt="logo" width="160px" /></Link>
-        <Box component="form" sx={{ display: "flex", flexDirection: "column", boxSizing: "border-box", backgroundColor: "#fff", border: "#ccc", borderRadius: "12px" }} gap={3} width="100%" maxWidth="450px" p={3} mt={3}>
+        <Box component="form" sx={{ display: "flex", flexDirection: "column", boxSizing: "border-box", backgroundColor: "#fff", border: "#ccc", borderRadius: "12px", '& legend': {textAlign:"left"},'& input': {direction:"ltr", textAlign:"center"} }} gap={3} width="100%" maxWidth="450px" p={3} mt={3}>
           <Typography component="h1" sx={{ direction: "rtl", textAlign: "center", fontWeight: "600" }}>ثبت نام </Typography>
-          <TextField name='fullName' label="نام و نام خانوادگی" variant='outlined' onChange={handleChange} sx={{ direction: "rtl" }} />
+          <TextField name='fullName' label="نام و نام خانوادگی" variant='outlined' onChange={handleChange} sx={{'& .MuiInputBase-input':{direction:"rtl !important"}}} direction="rtl !important"/>
           <TextField name="email" label="ایمیل" variant='outlined' sx={{
             '& .MuiFormHelperText-root': {
               direction: 'rtl',
@@ -52,7 +52,7 @@ export default function Register() {
             autoComplete="off"
             onChange={handleChange}
           />
-          <TextField name='phone' type="text" label="موبایل" variant='outlined' onChange={handleChange} />
+          <TextField name='phone' type="text" label="موبایل" variant='outlined' onChange={handleChange} required />
           <TextField name="password" label="گذرواژه" type='text' autoComplete="current-password" required onChange={handleChange} helperText="حداقل طول پسورد 8 کارکتر است" />
           <Button variant="contained" disableElevation size='large' onClick={handleRegister}>ثبت نام</Button>
           <Button component={Link} to="/login" variant='outlined' size='large'>ورود</Button>

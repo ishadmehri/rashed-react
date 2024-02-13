@@ -22,12 +22,13 @@ export default function PanelSidebar() {
     const handleClick = () => {
         setOpen(!open);
     };
+    console.log('loginUser',loginUser)
     return (
-        <Stack component="aside" flexDirection="column" sx={{ width: "20%", height: "100vh", position: "fixed", right: "0", backgroundColor: "#1a1c27", color: colors.blueGrey[50] }}>
+        <Stack component="aside" flexDirection="column" sx={{ width: "20%", height: "100vh", position: "fixed", right: "0", backgroundColor: "#1a1c27", color: colors.blueGrey[50],overflowY:"scroll" }}>
             <Stack justifyContent="center" alignItems="center" p={2} gap={2}>
                 <Avatar alt={loginUser?.fullName && loginUser.fullName} src={loginUser?.image?.length ? loginUser.image : `${process.env.PUBLIC_URL}/assets/default-avatar.jpg`} sx={{ width: 56, height: 56 }} />
-                <Typography component="p">سلام {loginUser?.fullName ? loginUser.fullName : loginUser.role}</Typography>
-                <Chip icon={<LocalPoliceTwoToneIcon />} label={loginUser.role} color="warning" variant="filled" size="medium"
+                <Typography component="p">سلام {loginUser?.fullName ? loginUser.fullName : loginUser?.role}</Typography>
+                <Chip icon={<LocalPoliceTwoToneIcon />} label={loginUser?.role} color="warning" variant="filled" size="medium"
                     sx={{ '& .MuiChip-label': { paddingRight: "0" }, '& .MuiChip-icon': { marginRight: "6px" } }}
                 />
                 <Button variant="outlined" onClick={() => {

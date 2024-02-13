@@ -18,6 +18,10 @@ import Orders from "./pages/panel/Orders";
 import ProductsPanel from "./pages/panel/ProductsPanel";
 import ProductCategories from "./pages/panel/ProductCategories";
 import Users from "./pages/panel/Users";
+import Categories from "./pages/categories/Categories";
+import CategoryDetails from "./pages/categories/CategoryDetails";
+import Search from "./components/Search";
+import OrderDetails from "./pages/panel/OrderDetails";
 const theme = createTheme({
   direction: "rtl",
   typography: {
@@ -63,7 +67,11 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/panel" element={<Panel />} /> 
               <Route path="/cart" element={<Cart />} /> 
-              <Route path="/panel/orders" element={<Orders />} /> 
+              <Route path="/search" element={<Search />} /> 
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/category/:id" element={<CategoryDetails />} />
+              <Route path="/panel/orders" element={<Orders />} />
+              <Route path="/panel/orders/:id" element={<OrderDetails />} />
               <Route path="/panel/products" element={<ProductsPanel />} /> 
               <Route path="/panel/categories" element={<ProductCategories />} />
               <Route path="/panel/users" element={<Users />} />

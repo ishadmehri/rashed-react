@@ -21,7 +21,7 @@ const ProductItem = ({ id, image, name, price, slug, rating }) => {
 }
 
 export default function ProductGrid({ products }) {
-    const allProducts = products?.map(el => <ProductItem key={el._id} id={el._id} name={el.name} price={el.price} image={el.images[0]} slug={el.slug} rating={el.rating} />)
+    const allProducts = Array.isArray(products) && products?.map(el => <ProductItem key={el._id} id={el._id} name={el.name} price={el.price} image={el.images[0]} slug={el.slug} rating={el.rating} />)
 
     return (
         <>

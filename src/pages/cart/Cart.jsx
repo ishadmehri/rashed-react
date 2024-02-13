@@ -22,13 +22,14 @@ export default function Cart() {
     useEffect(() => {
         loginUser?.token && fetch(`${process.env.REACT_APP_BACKEND_API_URL}/cart`, {
             method: "GET",
-            headers: {
+            headers: {  
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${loginUser?.token}`
             }
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 setLoginUser({ ...loginUser, cart: data.cart })
             })
     }, [loginUser?.token])
@@ -38,7 +39,6 @@ export default function Cart() {
             <Header />
             <Container>
                 <Typography my={5} component={"h1"} variant='h4' textAlign={"center"} fontWeight={600}>سبد خرید</Typography>
-
                 <Stack>
                     <Stack sx={{ width: "70%", border: "1px solid #eee" }} elevation={1}>
                         {/* <Typography>تعداد آیتم های کارت{loginUser?.cart?.length}</Typography> */}
@@ -54,9 +54,9 @@ export default function Cart() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {loginUser?.cart.map(row => <TableRow key={row.productId}>
+                                {loginUser?.cart?.length > 0 && loginUser.cart.map(row => <TableRow key={row.productId}>
                                     <TableCell><HighlightOffIcon data-productid={row.productId} onClick={e => handleChange(e.target.getAttribute('data-productid'), 0)} /></TableCell>
-                                    <TableCell><Box component="img" src={row.images[0]} sx={{ width: "64px" }} /></TableCell>
+                                    <TableCell><Box component="img" src={"row?.images[0]"} sx={{ width: "64px" }} /></TableCell>
                                     <TableCell>{row.name}</TableCell>
                                     <TableCell>{row.price} تومان</TableCell>
                                     <TableCell>
