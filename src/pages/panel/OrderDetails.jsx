@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import PanelSidebar from './PanelSidebar'
 import { AuthContext } from '../auth/AuthContext'
 import { useParams } from 'react-router-dom'
+import PanelMain from './PanelMain'
 
 export default function OrderDetails() {
     const { id } = useParams()
@@ -55,7 +56,7 @@ export default function OrderDetails() {
                 {/* panel sidebar */}
                 <PanelSidebar />
                 {/* panel Main */}
-                <Stack sx={{ width: "80%", height: "100vh", backgroundColor: colors.blueGrey[50] }}>
+                <PanelMain>
                     <Typography component="h1" variant='h4' fontWeight={600} my={3} textAlign="center">جزئیات سفارش</Typography>
 
                     {/* details */}
@@ -99,8 +100,8 @@ export default function OrderDetails() {
                     </Stack>
                     {/* customer info */}
                     {user &&
-                        <Stack component={Paper} flexDirection="row" mx={3} p={2} justifyContent="center" sx={{width:650}}>
-                            <Table sx={{ minWidth: 650,'& td':{textAlign:"right"},'& td:first-child':{width:100,fontWeight:600}}} size="small" aria-label="a dense table">
+                        <Stack component={Paper} flexDirection="row" mx={3} p={2} justifyContent="center" sx={{ width: 650 }}>
+                            <Table sx={{ minWidth: 650, '& td': { textAlign: "right" }, '& td:first-child': { width: 100, fontWeight: 600 } }} size="small" aria-label="a dense table">
                                 <TableBody>
                                     <TableRow>
                                         <TableCell>نام مشتری:</TableCell>
@@ -122,7 +123,8 @@ export default function OrderDetails() {
                             </Table>
                         </Stack>
                     }
-                </Stack>
+
+                </PanelMain>
             </Stack >
         </>
     )

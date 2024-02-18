@@ -16,9 +16,10 @@ import BadgeTwoToneIcon from '@mui/icons-material/BadgeTwoTone';
 import GroupAddTwoToneIcon from '@mui/icons-material/GroupAddTwoTone';
 import Diversity1TwoToneIcon from '@mui/icons-material/Diversity1TwoTone';
 
-export default function PanelSidebar() {
+export default function PanelSidebar({location}) {
+    console.log(location)
     const { loginUser, setLoginUser } = useContext(AuthContext)
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState({products:true,users:false});
     const handleClick = () => {
         setOpen(!open);
     };
@@ -41,33 +42,33 @@ export default function PanelSidebar() {
                 sx={{ width: '100%', backgroundColor: "#1a1c27", display: "flex", flexDirection: "column", padding: "5px", boxSizing: "border-box", gap: "5px", '& a': { textAlign: "right" }, '& .MuiListItemIcon-root': { color: "#ffffff96", minWidth: "42px" }, "& .MuiSvgIcon-root": { width: "1.7rem", height: "1.7rem" }, '& .Mui-selected': { borderRadius: "7px", backgroundColor: `${colors.teal[800]} !important` } }}
                 component="nav"
             >
-                <ListItemButton component={Link} to="/panel" selected >
+                <ListItemButton component={Link} to="/panel" selected={location?.pathname === "/panel"} >
                     <ListItemIcon>
                         <SpeedTwoToneIcon />
                     </ListItemIcon>
                     <ListItemText primary="داشبورد" />
                 </ListItemButton>
-                <Divider sx={{ backgroundColor: colors.blueGrey[700] }} />
+                {/* <Divider sx={{ backgroundColor: colors.blueGrey[700] }} /> */}
 
-                <ListItemButton component={Link} to="/panel/orders"  >
+                <ListItemButton component={Link} to="/panel/orders" selected={location?.pathname === "/panel/orders"}>
                     <ListItemIcon>
                         <LocalMallTwoToneIcon />
                     </ListItemIcon>
                     <ListItemText primary="سفارش ها" />
                 </ListItemButton>
-                <Divider sx={{ backgroundColor: colors.blueGrey[700] }} />
+                {/* <Divider sx={{ backgroundColor: colors.blueGrey[700] }} /> */}
 
                 {/* products */}
-                <ListItemButton onClick={handleClick}>
+                <ListItemButton onClick={()=>setOpen({...open,products:!open.products})} name={"محصولات"}>
                     <ListItemIcon>
                         <Inventory2TwoToneIcon />
                     </ListItemIcon>
                     <ListItemText primary="محصولات" />
-                    {open ? <ExpandLess /> : <ExpandMore />}
+                    {open?.products ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit >
+                <Collapse in={open?.products} timeout="auto" unmountOnExit >
                     <List component="div" disablePadding>
-                        <ListItemButton >
+                        <ListItemButton component={Link} to="/panel/products/add">
                             <ListItemIcon>
                                 <QueueTwoToneIcon />
                             </ListItemIcon>
@@ -87,17 +88,17 @@ export default function PanelSidebar() {
                         </ListItemButton>
                     </List>
                 </Collapse>
-                <Divider sx={{ backgroundColor: colors.blueGrey[700] }} />
+                {/* <Divider sx={{ backgroundColor: colors.blueGrey[700] }} /> */}
 
                 {/* users */}
-                <ListItemButton onClick={handleClick}>
+                <ListItemButton onClick={()=>setOpen({...open,users:!open.users})}>
                     <ListItemIcon>
                         <Face2TwoToneIcon />
                     </ListItemIcon>
                     <ListItemText primary="کاربران" />
-                    {open ? <ExpandLess /> : <ExpandMore />}
+                    {open?.users ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit >
+                <Collapse in={open?.users} timeout="auto" unmountOnExit >
                     <List component="div" disablePadding >
                         <ListItemButton component={Link} >
                             <ListItemIcon>
