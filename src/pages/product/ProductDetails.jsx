@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Header from '../../components/Header'
-import { Box, Button, Container, Rating, Stack, TextField, Typography, colors } from '@mui/material'
+import { Box, Button, Container, Rating, Snackbar, Stack, TextField, Typography, colors } from '@mui/material'
 import ProductImageSlider from './ProductImageSlider'
 import { AuthContext } from '../auth/AuthContext'
 
@@ -11,6 +11,16 @@ export default function ProductDetails() {
   const id = useParams().id
   const [product, setProduct] = useState(null)
   const [quantity, setQuantity] = useState(1)
+  //snackBar
+  const [snackbarOption,setSnackbarOption]=useState({
+    open:false,
+    message:"",
+  })
+  const handleClose = (e,reason)=>{
+    if(reason === 'clickaway') return;
+    setSnackbarOption({...snackbarOption,open:false})
+}
+  //add to cart
   const addToCart = async () => {
     fetch(`${process.env.REACT_APP_BACKEND_API_URL}/cart`, {
       method: "PATCH",
@@ -24,7 +34,12 @@ export default function ProductDetails() {
       })
     })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data)
+        if(data.success) {
+          setSnackbarOption({...snackbarOption,open:true,message:"محصول به سبد خرید اضافه شد"})
+        }
+      })
   }
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_API_URL}/product/${id}`)
@@ -33,7 +48,7 @@ export default function ProductDetails() {
   }, [])
   return (
     <>
-    {console.log(loginUser?.token)}
+      {console.log(loginUser?.token)}
       <Header />
       <Container>
         <Stack flexDirection="row" flexWrap="nowrap" justifyContent="space-between" sx={{ margin: "5em 0" }}>
@@ -54,7 +69,12 @@ export default function ProductDetails() {
               <TextField type='number' defaultValue={1} inputProps={{ min: "1", max: product?.quantity }} sx={{ '& .MuiInputBase-input': { textAlign: "center" } }} onChange={e => setQuantity(e.target.value)} />
               <Button variant="contained" disableElevation sx={{ backgroundColor: "#000" }} onClick={addToCart}>افزودن به سبد خرید</Button>
             </Stack>
-
+            <Snackbar
+              open={snackbarOption.open}
+              autoHideDuration={2000}
+              message={snackbarOption.message}
+              onClose={handleClose}
+            />
 
           </Stack>
         </Stack>

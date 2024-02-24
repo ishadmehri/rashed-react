@@ -17,7 +17,7 @@ import GroupAddTwoToneIcon from '@mui/icons-material/GroupAddTwoTone';
 import Diversity1TwoToneIcon from '@mui/icons-material/Diversity1TwoTone';
 
 export default function PanelSidebar({location}) {
-    console.log(location)
+    // console.log(location)
     const { loginUser, setLoginUser } = useContext(AuthContext)
     const [open, setOpen] = React.useState({products:true,users:false});
     const handleClick = () => {

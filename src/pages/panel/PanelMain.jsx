@@ -13,7 +13,6 @@ export default function PanelMain(props) {
                     {props.children}
                 </Stack>
             </Stack>
-
         </Stack>
     )
 }

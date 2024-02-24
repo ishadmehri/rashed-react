@@ -40,16 +40,28 @@ const theme = createTheme({
       }
       `,
     },
-    // MuiButton:{
-    //   styleOverrides: {
-    //     root: {
-    //       backgroundColor: 'red', // Set global background color
-    //     },
-    //     hover: {
-    //       backgroundColor: 'red !important', // Set global hover background color
-    //     },
-    //   }
-    // }
+    MuiTextField: {
+      styleOverrides:{
+        root: {
+          // Outlined
+          "& .MuiFormLabel-root": {
+            left: 'unset',
+            right:'26px',
+            transformOrigin:'top right',
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#2e2e2e",
+              borderWidth: "2px",
+            },
+            "&.Mui-focused": {
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "secondary.main",
+                borderWidth: "3px",
+              },
+            }
+          }
+        }
+      },
+    },
   },
 });
 function App() {

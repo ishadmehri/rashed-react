@@ -6,6 +6,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 export default function Cart() {
     const { loginUser, setLoginUser } = useContext(AuthContext)
+    //handle cart item changes
     const handleChange = async (productId, quantity) => {
         console.log(productId, quantity)
         fetch(`${process.env.REACT_APP_BACKEND_API_URL}/cart`, {
@@ -19,6 +20,7 @@ export default function Cart() {
             .then(res => res.json())
             .then(data => console.log(data))
     }
+    // get user cart from server
     useEffect(() => {
         loginUser?.token && fetch(`${process.env.REACT_APP_BACKEND_API_URL}/cart`, {
             method: "GET",

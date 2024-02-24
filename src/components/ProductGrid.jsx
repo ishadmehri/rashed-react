@@ -25,7 +25,7 @@ export default function ProductGrid({ products }) {
 
     return (
         <>
-            <Stack flexDirection="row" flexWrap="wrap" justifyContent="space-between" sx={{ '& .product-item': { width: "23%", border: "1px solid #ccc", borderRadius: "10px", padding: "10px", boxSizing: "border-box" }, '& .product-item img': { transition: "all ease-in-out .5s" }, '& .product-item:hover img': { scale: "0.9" } }}>
+            <Stack flexDirection="row" flexWrap="wrap" justifyContent="center" sx={{gap:"20px", '& .product-item': { width: "23%", border: "1px solid #ccc", borderRadius: "10px", padding: "10px", boxSizing: "border-box" }, '& .product-item img': { transition: "all ease-in-out .5s" }, '& .product-item:hover img': { scale: "0.9" } }}>
                 {allProducts}
             </Stack>
 

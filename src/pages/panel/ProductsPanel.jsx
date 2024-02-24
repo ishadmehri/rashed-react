@@ -3,7 +3,6 @@ import React from 'react'
 import PanelSidebar from './PanelSidebar'
 import { useLocation } from 'react-router-dom'
 import PanelMain from './PanelMain'
-import TinyEditor from '../../components/TinyEditor'
 
 export default function ProductsPanel() {
     const location= useLocation()
@@ -14,7 +13,6 @@ export default function ProductsPanel() {
                 <PanelSidebar location={location}/>
                 {/* panel Main */}
                 <PanelMain>
-                    <TinyEditor></TinyEditor>
                 </PanelMain>
             </Stack >
         </>
