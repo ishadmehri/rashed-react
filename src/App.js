@@ -66,9 +66,9 @@ const theme = createTheme({
 });
 function App() {
   const [loginUser, setLoginUser] = useState();
-  let data = JSON.parse(localStorage.getItem("loginUser"));
+  let data = localStorage.getItem("loginUser");
   useEffect(() => {
-    data && setLoginUser(data);
+    data && setLoginUser(JSON.parse(data));
     console.log(data);
   }, []);
   return (

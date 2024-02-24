@@ -35,7 +35,10 @@ export default function Cart() {
                 setLoginUser({ ...loginUser, cart: data.cart })
             })
     }, [loginUser?.token])
-
+useEffect(()=>{
+    localStorage.setItem("loginUser", JSON.stringify(loginUser))
+    console.log('localstorage updated because of cart change')
+},[loginUser?.cart])
     return (
         <>
             <Header />
